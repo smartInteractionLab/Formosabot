@@ -42,14 +42,15 @@ module.exports = (robot) ->
         msg.send "#{entry.example}"
       else
         msg.send "#{entry.definition}"
-      if sounds and sounds.length
-        msg.send "#{sounds.join(' ')}"
+      # if sounds and sounds.length
+      #   msg.send "#{sounds.join(' ')}"
 
 urbanDict = (msg, query, callback) ->
   msg.http("http://api.urbandictionary.com/v0/define?term=#{escape(query)}")
     .get() (err, res, body) ->
       result = JSON.parse(body)
       if result.list.length
-        callback(true, result.list[0], result.sounds)
+        # callback(true, result.list[0], result.sounds)
+        callback(true, result.list[0])
       else
         callback(false)
