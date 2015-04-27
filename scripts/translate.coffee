@@ -27,7 +27,7 @@ languages =
   "tl": "Filipino",
   "fi": "Finnish",
   "fr": "French",
-  "gl": "Galician",
+  "gl": "Gaelic",
   "ka": "Georgian",
   "de": "German",
   "el": "Greek",
@@ -85,7 +85,7 @@ module.exports = (robot) ->
     term   = "\"#{msg.match[3]}\""
     origin = if msg.match[1] isnt undefined then getCode(msg.match[1], languages) else 'auto'
     target = if msg.match[2] isnt undefined then getCode(msg.match[2], languages) else 'en'
-    
+
     msg.http("https://translate.google.com/translate_a/t")
       .query({
         client: 't'
@@ -111,4 +111,3 @@ module.exports = (robot) ->
               msg.send "#{term} is #{language} for #{parsed}"
             else
               msg.send "The #{language} #{term} translates as #{parsed} in #{languages[target]}"
-
