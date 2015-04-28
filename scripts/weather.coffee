@@ -19,10 +19,10 @@ weather = (msg, query, cb) ->
     .query(where: query)
     .header('User-Agent', 'Mozilla/5.0')
     .get() (err, res, body) ->
-      temp = body.match(/<span class="temperature" tempf="\d*">(\d+)/)?[1] || ""
-      remark = body.match(/<p class="remark">(.*)</)?[1] || "remark not found"
+      temp = body.match(/<h1 class="topRemark" tempf="\d*">(\d+)/)?[1] || ""
+      remark = body.match(/<h2 class="remark">(.*)</)?[1] || "remark not found"
       flavor = body.match(/<p class="flavor">(.*)</)?[1] || "flavor not found"
-      cb(temp, remark, flavor)
+      cb(temp, remark)
 
 module.exports = (robot) ->
   robot.respond /(what's|what is) the weather for (.*)/i, (msg) ->
