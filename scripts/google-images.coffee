@@ -35,30 +35,30 @@ module.exports = (robot) ->
         msg.send "#{mustachify}#{encodedUrl}"
 
 imageMe = (msg, query, animated, faces, cb) ->
-    # Using deprecated Google image search API
-    q = v: '1.0', rsz: '8', q: query, safe: 'active'
-    if animated is true
-      q.as_filetype = 'gif'
-      q.q += ' animated'
-    if faces is true
-      q.as_filetype = 'jpg'
-      q.imgtype = 'face'
-    msg.http('https://ajax.googleapis.com/ajax/services/search/images')
-      .query(q)
-      .get() (err, res, body) ->
-        if err
-          msg.send "Encountered an error :( #{err}"
-          return
-        if res.statusCode isnt 200
-          msg.send "Bad HTTP response :( #{res.statusCode}"
-          return
-        images = JSON.parse(body)
-        images = images.responseData?.results
-        if images?.length > 0
-          image = msg.random images
-          cb ensureResult(image.unescapedUrl, animated)
-        else
-          msg.send "Sorry, I found no results for '#{query}'."
+  # Using deprecated Google image search API
+  q = v: '1.0', rsz: '8', q: query, safe: 'active'
+  if animated is true
+    q.as_filetype = 'gif'
+    q.q += ' animated'
+  if faces is true
+    q.as_filetype = 'jpg'
+    q.imgtype = 'face'
+  msg.http('https://ajax.googleapis.com/ajax/services/search/images')
+    .query(q)
+    .get() (err, res, body) ->
+      if err
+        msg.send "Encountered an error :( #{err}"
+        return
+      if res.statusCode isnt 200
+        msg.send "Bad HTTP response :( #{res.statusCode}"
+        return
+      images = JSON.parse(body)
+      images = images.responseData?.results
+      if images?.length > 0
+        image = msg.random images
+        cb ensureResult(image.unescapedUrl, animated)
+      else
+        msg.send "Sorry, I found no results for '#{query}'."
 
 animateMe = (msg, query, animated, faces, cb) ->
   cb = animated if typeof animated == 'function'
@@ -130,9 +130,6 @@ animateMe = (msg, query, animated, faces, cb) ->
           cb ensureResult(image.unescapedUrl, animated)
         else
           msg.send "Sorry, I found no results for '#{query}'."
-
-
-
 
 # Forces giphy result to use animated version
 ensureResult = (url, animated) ->
