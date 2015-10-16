@@ -24,5 +24,6 @@ images = [
 ]
 
 module.exports = (robot) ->
-  robot.hear /s(rsly|eriously) gu(?:ise|ys)/i, (msg) ->
+  regex = /seriously/i
+  robot.hear regex, (msg) ->
     msg.send msg.random images
