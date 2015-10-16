@@ -14,5 +14,7 @@
 #   samn
 
 module.exports = (robot) ->
-  robot.hear /\bgit\b/, (msg) ->
-    if Math.random() < 0.1 then msg.reply 'ima git you sucka'
+  regex = /git/i
+
+  robot.hear regex, (msg) ->
+     msg.reply 'ima git you sucka'

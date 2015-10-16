@@ -47,7 +47,8 @@ module.exports = (robot) ->
   if process.env.HUBOT_SHIP_EXTRA_GOPHERS
     regex = /(went|go(ing|es)?) for it/i
   else
-    regex = /go for it/i
+    # regex = /go for it/i
+    regex = /(went|go(ing|es)?) for it/i
 
   robot.hear regex, (msg) ->
     msg.send msg.random gophers
