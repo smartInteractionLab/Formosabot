@@ -25,5 +25,5 @@ ives = [
 ]
 
 module.exports = (robot) ->
-  robot.hear /(aluminium|essential|elegant|efficient|incredible|magical|meticulous|unibody|design|apple|from the ground up)/i, (msg) ->
+  robot.hear /(aluminium|essential|elegant|efficient|incredible|magical|meticulous|unibody|product design|apple|from the ground up)/i, (msg) ->
     msg.send msg.random ives
